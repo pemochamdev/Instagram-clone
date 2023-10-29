@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Instagrame Clone!</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+  </head>
+  <body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="{% static 'images/instagram-logo.png' %}" width="64" height="64">
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+                <span class="material-icons">home</span>
+              Home
+            </a>
+      
+            <a class="navbar-item">
+                <span class="material-icons">explore</span>
+              Explore
+            </a>
+
+            <a class="navbar-item">
+                <span class="material-icons">notifications</span>
+                Notifications
+            </a>
+
+            <a class="navbar-item">
+                <span class="material-icons">inbox</span>
+                Inbox
+            </a>
+            <a class="navbar-item">
+                <span class="material-icons">person</span>
+                Profile
+            </a>
+
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <span class="material-icons">settings</span>
+
+                Settings
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                    <span class="material-icons">lock</span>
+                  Change password
+                </a>
+               
+                <a class="navbar-item">
+                    <span class="material-icons">call</span>
+                  Contact
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                    <span class="material-icons">report</span>
+                  Report an issue
+                </a>
+                <a class="navbar-item">
+                    <span class="material-icons">logout</span>
+                    Logout
+                  </a>
+              </div>
+            </div>
+          </div>
+      
+         
+        </div>
+      </nav>
+
+
+      {% block content %}{% endblock content %}
+
+
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+      </body>
+    </html>
