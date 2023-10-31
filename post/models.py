@@ -119,5 +119,29 @@ class Stream(models.Model):
             )
             stream.save()
 
+
+class Likes(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_likes'
+    )
+    post = models.ForeignKey(
+        Post, 
+        related_name='post_likes',
+        on_delete = models.CASCADE
+    )
+
+    class Meta:
+        verbose_name = "Likes"
+        verbose_name_plural = "Likes"
+
+    def __str__(self):
+        return '{} like {}'.format(self.user, self.post)
+
+    def get_absolute_url(self):
+        return reverse("likes", kwargs={"pk": self.pk})
+
+
 post_save.connect(Stream.post_add, sender=Post)
     
