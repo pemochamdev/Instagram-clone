@@ -72,7 +72,7 @@ class Post(models.Model):
     likes = models.IntegerField(default=1)
 
     def get_absolute_url(self):
-        return reverse("post-detail", kwargs={"uuid": self.uuid})
+        return reverse("post_detail", kwargs={"uuid": self.uuid})
     
     def __str__(self):
         return '{} posted at {}'.format(self.user, self.posted)

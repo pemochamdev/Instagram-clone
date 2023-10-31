@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
@@ -24,6 +24,8 @@ def index(request):
     }
     return render(request, 'post/index.html', context)
 
+
+@login_required
 def create_new_post(request):
     tags_objects =[]
     if request.method == 'POST':
@@ -55,3 +57,13 @@ def create_new_post(request):
         'form':form,
     }
     return render(request, 'post/new_post.html', context)
+
+@login_required
+def post_detail(request, uuid):
+    user = request.user
+    post = get_object_or_404(Post, uuid=uuid)
+
+    context = {
+        'post':post,
+    }
+    return render(request, 'post/post_detail.html', context)
