@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required
 from auth_apps.models import Profile
 from post.models import Stream, Follower, Post, Tag
 from post.forms import PostForm
-def tag(request, slug):
-    return render(request, 'tags.html')
 
 
 def index(request):
@@ -67,3 +65,14 @@ def post_detail(request, uuid):
         'post':post,
     }
     return render(request, 'post/post_detail.html', context)
+
+
+def tag(request, slug):
+    tag= get_object_or_404(Tag, slug=slug)
+    posts = Post.objects.filter(tags=tag).order_by('-posted')
+    context = {
+        'posts':posts,
+        'tag':tag
+    }
+    return render(request, 'post/tags.html', context)
+
