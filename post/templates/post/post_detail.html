@@ -42,9 +42,9 @@
                     <a href="#"><i class="material-icons has-text-success">save_alt</i></a>
                     <p>Save Post</p> 
                   </div>
-
+                  
                   <div class="media-right">
-                    <a href="#"><i class="material-icons has-text-danger">favorite</i></a>
+                    <a href="{% url 'like' post.uuid %}"><i class="material-icons has-text-danger">favorite</i></a>
                     <p>{{ post.likes }} Likes</p>  
                   </div>
               

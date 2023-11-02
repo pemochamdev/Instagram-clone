@@ -69,7 +69,7 @@ class Post(models.Model):
         Tag,
         related_name='tags'
     )
-    likes = models.IntegerField(default=1)
+    likes = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"uuid": self.uuid})
