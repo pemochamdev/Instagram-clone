@@ -6,6 +6,7 @@ from django.utils.html import mark_safe
 from django.db.models.signals import post_save
 
 
+from post.models import Post
 
 def user_directory_path(instance, files):
     return 'user_{0}/{1}'.format(instance.user.id, files)
@@ -20,7 +21,7 @@ class Profile(models.Model):
     picture_profile = models.ImageField(upload_to=user_directory_path, default='profile.png')
     profile_info = models.TextField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    #favorites = models.ManyToManyField(Post)
+    favorites = models.ManyToManyField(Post)
 
     def __str__(self):
         return self.user.username

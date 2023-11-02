@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from auth_apps.models import Profile
 from post.models import Stream, Follower, Post, Tag, Likes
 from post.forms import PostForm
+from auth_apps.models import Profile
 
 
 def index(request):
@@ -61,9 +62,18 @@ def create_new_post(request):
 def post_detail(request, uuid):
     user = request.user
     post = get_object_or_404(Post, uuid=uuid)
+    profile = get_object_or_404(Profile, user=user)
+    favorited = False
+
+    if user.is_authenticated:
+        profile = get_object_or_404(Profile, user=user)
+
+        if profile.favorites.filter(uuid=uuid).exists():
+            favorited=True
 
     context = {
         'post':post,
+        'favorited':favorited,
     }
     return render(request, 'post/post_detail.html', context)
 
@@ -95,4 +105,18 @@ def like(request, uuid):
     post.likes = current_likes
     
     post.save()
+    return HttpResponseRedirect(reverse('post_detail', args=[uuid]))
+
+
+def favorite(request, uuid):
+    user = request.user
+    post = get_object_or_404(Post, uuid=uuid)
+    profile = get_object_or_404(Profile, user=user)
+
+    if profile.favorites.filter(uuid=uuid).exists():
+        profile.favorites.remove(post)
+    
+    else:
+        profile.favorites.add(post)
+    
     return HttpResponseRedirect(reverse('post_detail', args=[uuid]))
